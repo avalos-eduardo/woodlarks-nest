@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "@fontsource/lato";
+@import "@fontsource-variable/playfair";
 
 @theme {
   --font-lato: "Lato", sans-serif;
+  --font-playfair: "Playfair", serif;
 }
