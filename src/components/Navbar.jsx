@@ -30,7 +30,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav aria-label="Main Navigation" className="hidden md:block">
-          <ul className="flex text-[#554635] text-xl gap-6 font-stretch-110%">
+          <ul className="flex text-[#554635] text-xl gap-6 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
                 <NavLink to={to} className={navLinkClass}>
@@ -62,7 +62,7 @@ export default function Navbar() {
       {/* Mobile Dropdown */}
       {menuOpen && (
         <nav className="md:hidden pt-2 pb-4 bg-[#EEE8D8] px-5">
-          <ul className="flex flex-col text-[#554635] text-xl gap-2 font-stretch-110%">
+          <ul className="flex flex-col text-[#554635] text-xl gap-2 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
                 <NavLink
