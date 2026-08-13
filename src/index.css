@@ -8,4 +8,6 @@
 @theme {
   --font-lato: "Lato", sans-serif;
   --font-playfair-display: "Playfair Display Variable", serif;
+  --color-offwhite: #eee8d8;
+  --color-wood-brown: #554635;
 }

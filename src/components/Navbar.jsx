@@ -15,10 +15,10 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="relative shadow-lg">
-      <div className="flex justify-between items-center h-27 md:h-23 px-5 md:px-11 bg-[#EEE8D8]">
+    <header className="sticky top-0 w-full z-100 shadow-lg">
+      <div className="flex justify-between items-center h-27 md:h-23 px-5 md:px-11 bg-offwhite">
         <div className="flex items-center">
-          <Link to="/" aria-label="Homepage">
+          <Link to="/" aria-label="Homepage" onClick={() => setMenuOpen(false)}>
             <img
               src={woordlarkLogo}
               alt="Woodlark's Nest Logo"
@@ -61,7 +61,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <nav className="md:hidden pt-2 pb-4 bg-[#EEE8D8] px-5">
+        <nav className="md:hidden pt-2 pb-4 bg-offwhite px-5">
           <ul className="flex flex-col text-[#554635] text-xl gap-2 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
