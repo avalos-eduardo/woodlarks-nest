@@ -5,6 +5,7 @@ import shareVision from "../assets/woodlark-share-vision.webp";
 import shopDrawings from "../assets/woodlark-shop-drawings.png";
 import tableTop from "../assets/woodlark-tabletop.jpg";
 import familyPic from "../assets/woodlark-family.jpg";
+import shoeBench from "../assets/woodlark-shoe-bench.jpg";
 
 export default function Home() {
   return (
@@ -35,15 +36,15 @@ export default function Home() {
       </section>
 
       {/* Second Section */}
-      <section className="relative w-full h-110 2xl:h-140 overflow-hidden text-offwhite">
+      <section className="relative w-full h-auto py-20 md:py-22 overflow-hidden text-offwhite">
         <img
           src={toddlerTowerImg}
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center bg-black"
         />
         <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0)_0%,white_450%)]"></div>
         <div className="flex flex-col md:flex-row h-full w-full">
-          <div className="flex flex-2 md:flex-3 justify-start md:justify-center items-center pt-5 px-8">
-            <h1 className="text-4xl lg:text-7xl font-playfair-display italic lg:max-w-4/5 text-left">
+          <div className="flex flex-2 md:flex-3 justify-start md:justify-center items-center py-5 px-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair-display italic md:max-w-6/6 lg:max-w-5/6 text-left">
               Furniture Built Around Your Home
             </h1>
           </div>
@@ -207,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* Fifth Section */}
-      <section className="bg-[#252a08] px-6 py-15 text-offwhite">
+      <section className="bg-[#2A2C0C] px-6 py-15 text-offwhite">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-12 text-center font-playfair-display text-[clamp(2rem,4vw,2.5rem)]">
             Who We Are
@@ -265,6 +266,31 @@ export default function Home() {
               Read Our Story
             </Link>
           </div>
+        </div>
+      </section>
+      {/* Sixth Section */}
+      <section className="relative w-full h-auto overflow-hidden text-offwhite py-10 md:py-15">
+        <img
+          src={shoeBench}
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center bg-black"
+        />
+        <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0)_0%,white_850%)]"></div>
+        <div class="flex flex-col h-full items-center gap-8 lg:gap-12 px-5 pb-4">
+          <h1 className="text-3xl md:text-5xl font-playfair-display text-center">
+            Let's Bring Your Ideas Home
+          </h1>
+          <p className="max-w-14/16 md:max-w-7/13 text-center font-lato text-lg md:text-xl leading-relaxed">
+            If you’re considering custom hardwood furniture for your space, we’d
+            love to hear from you. Whether you’re starting with a clear vision
+            or just a few ideas, we’ll work together to create a piece that fits
+            your home and is built with care to last.
+          </p>
+          <Link
+            to="/custom-piece"
+            className="bg-[#EDE8D8] text-[#503E2D] py-2 px-4 lg:py-4 lg:px-8 rounded-lg text-xl lg:text-2xl font-playfair-display font-semibold text-center cursor-pointer"
+          >
+            Start Your Custom Piece
+          </Link>
         </div>
       </section>
     </>
