@@ -11,7 +11,7 @@ export default function Footer() {
         <a href="mailto:jesus@thewoodlarksnest.com" className="underline">
           jesus@thewoodlarksnest.com
         </a>
-        <a href="tel:+9013000949" className="underline">
+        <a href="sms:9013000949" className="underline">
           (901) 300-0949
         </a>
       </div>
