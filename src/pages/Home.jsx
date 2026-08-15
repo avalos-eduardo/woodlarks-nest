@@ -4,6 +4,7 @@ import toddlerTowerImg from "../assets/woodlark-toddler-tower.png";
 import shareVision from "../assets/woodlark-share-vision.webp";
 import shopDrawings from "../assets/woodlark-shop-drawings.png";
 import tableTop from "../assets/woodlark-tabletop.jpg";
+import familyPic from "../assets/woodlark-family.jpg";
 
 export default function Home() {
   return (
@@ -15,13 +16,14 @@ export default function Home() {
           alt="Hero image of dining table and dining chairs."
           className="absolute inset-0 -z-20 h-full w-full object-cover object-bottom"
         />
-        <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.25)_15%,rgba(0,0,0,0.25)_15%,transparent_100%)]"></div>
+        <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_15%,rgba(0,0,0,0.3)_15%,transparent_100%)]"></div>
         <div class="flex flex-col h-full items-center justify-center gap-8 lg:gap-12 px-5 pb-4">
           <h1 className="text-5xl lg:text-7xl font-playfair-display text-center">
             Handcrafted for <span className="italic">Your</span> Nest
           </h1>
-          <p className="text-xl lg:text-3xl font-lato font-thin text-center max-w-4/5">
-            Custom hardwood furniture, from our nest to yours
+          <p className="text-xl lg:text-3xl font-lato text-center max-w-4/5">
+            Custom hardwood furniture, from our nest to{" "}
+            <span className="italic">yours</span>
           </p>
           <Link
             to="/custom-piece"
@@ -200,6 +202,68 @@ export default function Home() {
               Following completion, we coordinate delivery and placement in your
               home, along with simple care guidance to help it age beautifully.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Fifth Section */}
+      <section className="bg-[#252a08] px-6 py-15 text-offwhite">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-12 text-center font-playfair-display text-[clamp(2rem,4vw,2.5rem)]">
+            Who We Are
+          </h2>
+
+          <div className="text-[clamp(1.05rem,1.6vw,1.3rem)] leading-[1.7] font-lato font-thin">
+            {/* Egg image */}
+            <img
+              src={familyPic}
+              alt="Jesus and Dolores"
+              className="
+          float-left
+          mr-[clamp(1rem,2vw,1.5rem)]
+          mb-2
+          w-[clamp(18rem,34vw,24rem)]
+          md:w-[clamp(12rem,28vw,17rem)]
+          aspect-3/4
+          object-cover
+          rounded-[50%/60%_60%_38%_38%]
+
+          [shape-outside:inset(0_round_50%/60%_60%_38%_38%)]
+
+          max-[640px]:float-none
+          max-[640px]:mx-auto
+          max-[640px]:mb-8
+          max-[640px]:block
+        "
+            />
+
+            <p className="mb-6">
+              The Woodlark’s Nest is a small, Hispanic family-owned furniture
+              studio in Memphis, Tennessee, shaped by the values we were raised
+              with—family, hard work, and care in the details.
+            </p>
+
+            <p className="mb-6">
+              We're Jesus and Dolores, the couple behind the studio. We both
+              grew up in homes where the pieces around us were part of everyday
+              life: places to gather, work, rest, and feel connected. That
+              belief in home is at the heart of what we build.
+            </p>
+
+            <p>
+              Every piece is designed and built by hand, one at a time, for
+              people who want furniture that feels intentional, lasting, and
+              truly their own.
+            </p>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              to="/our-story"
+              className="bg-[#EDE8D8] text-[#554b3e] py-2 px-4 lg:py-4 lg:px-8 rounded-lg text-xl lg:text-2xl font-playfair-display font-semibold text-center cursor-pointer"
+            >
+              Read Our Story
+            </Link>
           </div>
         </div>
       </section>
