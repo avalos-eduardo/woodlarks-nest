@@ -1,3 +1,45 @@
+import missionStyleShoeBench from "../assets/woodlark-mission-style-shoe-bench.jpg";
+import shoeBench from "../assets/woodlark-shoe-bench.jpg";
+import PortfolioPieceCard from "../components/PortfolioPieceCard";
+import diningTableImg from "../assets/woodlark-dining-table.webp";
+import toddlerTowerTwo from "../assets/woodlark-toddler-tower-2.jpg";
+import ShareYourVision from "../components/ShareYourVision";
+
 export default function Portfolio() {
-  return <></>;
+  return (
+    <>
+      <section className="bg-offwhite h-auto px-8 md:px-12 py-8 ">
+        <h1 className="font-playfair-display text-4xl pb-5 text-wood-brown">
+          Portfolio
+        </h1>
+        <div className="grid grid-cols-2 gap-4 md:gap-5">
+          <div className="flex flex-col gap-2 md:gap-5">
+            <PortfolioPieceCard
+              img={missionStyleShoeBench}
+              description="Mission Style Shoe Bench • White Oak"
+              alt="Mission Style Shoe Bench • White Oak"
+            />
+            <PortfolioPieceCard
+              img={shoeBench}
+              description="Mission Style Shoe Bench • White Oak"
+              alt="Mission Style Shoe Bench • White Oak"
+            />
+          </div>
+          <div className="flex flex-col gap-2 md:gap-5">
+            <PortfolioPieceCard
+              img={diningTableImg}
+              description="Mission Style Dining Table • White Oak"
+              alt="Mission Style Dining Table • White Oak"
+            />
+            <PortfolioPieceCard
+              img={toddlerTowerTwo}
+              description="Toddler Tower • Cherry"
+              alt="Toddler Tower • Cherry"
+            />
+          </div>
+        </div>
+      </section>
+      <ShareYourVision />
+    </>
+  );
 }

@@ -15,7 +15,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 w-full z-100 shadow-lg">
+    <header className="sticky top-0 w-full z-100 shadow-xl">
       <div className="flex justify-between items-center h-27 md:h-23 px-5 md:px-11 bg-offwhite">
         <div className="flex items-center">
           <Link to="/" aria-label="Homepage" onClick={() => setMenuOpen(false)}>
@@ -30,7 +30,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav aria-label="Main Navigation" className="hidden md:block">
-          <ul className="flex text-[#554635] text-xl gap-6 font-lato">
+          <ul className="flex text-wood-brown text-xl gap-6 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
                 <NavLink to={to} className={navLinkClass}>
@@ -62,7 +62,7 @@ export default function Navbar() {
       {/* Mobile Dropdown */}
       {menuOpen && (
         <nav className="md:hidden pt-2 pb-4 bg-offwhite px-5">
-          <ul className="flex flex-col text-[#554635] text-xl gap-2 font-lato">
+          <ul className="flex flex-col text-wood-brown text-xl gap-2 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
                 <NavLink
