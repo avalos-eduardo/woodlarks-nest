@@ -1,7 +1,7 @@
 export default function OurStorySections({ header, paragraphs }) {
   return (
     <div className="px-10 md:px-39 pb-5 h-auto">
-      <h2 className="text-wood-brown text-3xl md:text-5xl font-playfair-display mb-10">
+      <h2 className="text-wood-brown text-3xl md:text-5xl font-playfair-display mb-5 md:mb-10">
         {header}
       </h2>
       {paragraphs.map((text, index) => (
