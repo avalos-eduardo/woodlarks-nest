@@ -23,6 +23,7 @@ export default function Navbar() {
               src={woordlarkLogo}
               alt="Woodlark's Nest Logo"
               className="h-18"
+              onClick={() => window.scrollTo(0, 0)}
             />
           </Link>
           <p className="ml-3"></p>
@@ -33,7 +34,11 @@ export default function Navbar() {
           <ul className="flex text-wood-brown text-xl gap-6 font-lato">
             {links.map(({ to, label }) => (
               <li key={to}>
-                <NavLink to={to} className={navLinkClass}>
+                <NavLink
+                  to={to}
+                  className={navLinkClass}
+                  onClick={() => window.scrollTo(0, 0)}
+                >
                   {label}
                 </NavLink>
               </li>
@@ -68,7 +73,10 @@ export default function Navbar() {
                 <NavLink
                   to={to}
                   className={navLinkClass}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   {label}
                 </NavLink>
