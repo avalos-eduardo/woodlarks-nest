@@ -29,6 +29,7 @@ export default function Home() {
           <Link
             to="/custom-piece"
             className="bg-[#EDE8D8] text-[#503E2D] py-2 px-4 lg:py-4 lg:px-8 rounded-lg text-xl lg:text-2xl font-playfair-display font-semibold text-center cursor-pointer"
+            onClick={() => window.scrollTo(0, 0)}
           >
             Start Your Custom Piece
           </Link>
@@ -131,6 +132,7 @@ export default function Home() {
               <Link
                 to="/custom-piece"
                 className="underline underline-offset-4 decoration-1"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Reach out
               </Link>{" "}
@@ -262,6 +264,7 @@ export default function Home() {
             <Link
               to="/our-story"
               className="bg-[#EDE8D8] text-[#554b3e] py-2 px-4 lg:py-4 lg:px-8 rounded-lg text-xl lg:text-2xl font-playfair-display font-semibold text-center cursor-pointer"
+              onClick={() => window.scrollTo(0, 0)}
             >
               Read Our Story
             </Link>
@@ -288,6 +291,7 @@ export default function Home() {
           <Link
             to="/custom-piece"
             className="bg-[#EDE8D8] text-[#503E2D] py-2 px-4 lg:py-4 lg:px-8 rounded-lg text-xl lg:text-2xl font-playfair-display font-semibold text-center cursor-pointer"
+            onClick={() => window.scrollTo(0, 0)}
           >
             Start Your Custom Piece
           </Link>
