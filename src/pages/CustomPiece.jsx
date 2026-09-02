@@ -5,9 +5,65 @@ import useDocumentTitle from "../hooks/useDocumentTitle";
 export default function CustomPiece() {
   const [files, setFiles] = useState([]);
   const [fileError, setFileError] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    newsletter: false,
+    phone: "",
+    pieceType: "",
+    budget: "",
+    description: "",
+  });
 
   const MAX_FILES = 5;
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((current) => ({
+      ...current,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const submission = new FormData();
+
+    submission.append("firstName", formData.firstName);
+    submission.append("lastName", formData.lastName);
+    submission.append("email", formData.email);
+    submission.append("newsletter", formData.newsletter);
+    submission.append("phone", formData.phone);
+    submission.append("pieceType", formData.pieceType);
+    submission.append("budget", formData.budget);
+    submission.append("description", formData.description);
+
+    files.forEach((item) => {
+      submission.append("images", item.file);
+    });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: submission,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // add success handling here later.
+      console.log("Form submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+
+      // add user-facing error handling here later.
+    }
+  };
 
   const handleFileSelect = (e) => {
     const selectedFiles = Array.from(e.target.files || []);
@@ -36,7 +92,7 @@ export default function CustomPiece() {
 
       // Maximum file size
       if (file.size > MAX_FILE_SIZE) {
-        setFileError(`${file.name} is too large. Images must be under 10 MB.`);
+        setFileError(`${file.name} is too large. Images must be under 5 MB.`);
         continue;
       }
 
@@ -83,61 +139,92 @@ export default function CustomPiece() {
       </section>
 
       <section className="h-auto py-15 lg:py-20 grid place-items-center">
-        <form className="flex flex-col bg-offwhite rounded-3xl w-[85vw] md:w-[55vw] p-8 md:p-10 lg:p-12 font-lato text-wood-brown">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col bg-offwhite rounded-3xl w-[85vw] md:w-[55vw] p-8 md:p-10 lg:p-12 font-lato text-wood-brown"
+        >
           <p className="text-xl mb-3">Name</p>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex flex-1 flex-col gap-2">
-              <label>
+              <label htmlFor="firstName">
                 First Name <span className="font-thin">(required)</span>
               </label>
               <input
+                id="firstName"
+                name="firstName"
                 type="text"
+                value={formData.firstName}
+                onChange={handleChange}
                 className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
                 required
               />
             </div>
             <div className="flex flex-1 flex-col gap-2">
-              <label>
+              <label htmlFor="lastName">
                 Last Name <span className="font-thin">(required)</span>
               </label>
               <input
+                id="lastName"
+                name="lastName"
                 type="text"
+                value={formData.lastName}
+                onChange={handleChange}
                 className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
                 required
               />
             </div>
           </div>
 
-          <label className="text-xl mt-7 mb-3">
+          <label htmlFor="email" className="text-xl mt-7 mb-3">
             Email <span className="text-base font-thin">(required)</span>
           </label>
           <input
+            id="email"
+            name="email"
             type="email"
+            value={formData.email}
+            onChange={handleChange}
             className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
             required
           />
-          <label className="flex items-center cursor-pointer select-none mt-3">
+          <label
+            htmlFor="newsletter"
+            className="flex items-center cursor-pointer select-none mt-3"
+          >
             <input
+              id="newsletter"
+              name="newsletter"
               type="checkbox"
+              checked={formData.newsletter}
+              onChange={handleChange}
               className="mr-3 appearance-none rounded-full h-4 w-4 border border-[#9b9585] bg-transparent cursor-pointer checked:bg-wood-brown"
             />
             <span>Sign up for news and updates</span>
           </label>
 
-          <label className="text-xl mt-7 mb-3">Phone</label>
+          <label htmlFor="phone" className="text-xl mt-7 mb-3">
+            Phone
+          </label>
           <input
+            id="phone"
+            name="phone"
             type="tel"
+            value={formData.phone}
+            onChange={handleChange}
             className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
           />
 
-          <label className="text-xl mt-7 mb-3">
+          <label htmlFor="pieceType" className="text-xl mt-7 mb-3">
             What kind of piece are you interested in?{" "}
             <span className="text-base font-thin">(required)</span>
           </label>
           <select
+            id="pieceType"
+            name="pieceType"
+            value={formData.pieceType}
+            onChange={handleChange}
             className="bg-white rounded-lg h-11 px-3 text-[#777] outline-none border border-transparent focus:border-wood-brown cursor-pointer"
             required
-            defaultValue=""
           >
             <option value="" disabled>
               Select an option
@@ -149,13 +236,16 @@ export default function CustomPiece() {
             <option value="other">Other</option>
           </select>
 
-          <label className="text-xl mt-7 mb-3">
+          <label htmlFor="budget" className="text-xl mt-7 mb-3">
             Budget <span className="text-base font-thin">(required)</span>
           </label>
           <select
+            id="budget"
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
             className="bg-white rounded-lg h-11 px-3 text-[#777] outline-none border border-transparent focus:border-wood-brown cursor-pointer"
             required
-            defaultValue=""
           >
             <option value="" disabled>
               Select an option
@@ -167,7 +257,7 @@ export default function CustomPiece() {
             <option value="unsure">Not sure yet, let's discuss</option>
           </select>
 
-          <label className="text-xl mt-7 mb-3">
+          <label htmlFor="description" className="text-xl mt-7 mb-3">
             Tell us a bit about your piece{" "}
             <span className="text-base font-thin">(required)</span>
           </label>
@@ -178,6 +268,10 @@ export default function CustomPiece() {
             unique constraints
           </p>
           <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
             rows="5"
             className="bg-white rounded-lg p-3 resize-none outline-none border border-transparent focus:border-wood-brown"
             required
