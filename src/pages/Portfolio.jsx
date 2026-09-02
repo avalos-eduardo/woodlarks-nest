@@ -4,8 +4,11 @@ import PortfolioPieceCard from "../components/PortfolioPieceCard";
 import diningTableImg from "../assets/woodlark-dining-table.webp";
 import toddlerTowerTwo from "../assets/woodlark-toddler-tower-2.jpg";
 import ShareYourVision from "../components/ShareYourVision";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 export default function Portfolio() {
+  useDocumentTitle("Portfolio — The Woodlark's Nest");
+
   return (
     <>
       <section className="bg-offwhite h-auto px-8 md:px-12 py-8 ">

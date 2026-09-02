@@ -1,6 +1,7 @@
 import ShareYourVision from "../components/ShareYourVision";
 import woodlarkFamily2 from "../assets/woodlark-family-2.jpg";
 import OurStorySections from "../components/OurStorySections";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const paragraphOne = [
   <>
@@ -60,6 +61,7 @@ const paragraphFour = [
 ];
 
 export default function OurStory() {
+  useDocumentTitle("Our Story — The Woodlark's Nest");
   return (
     <>
       <section className="bg-offwhite h-auto py-8">

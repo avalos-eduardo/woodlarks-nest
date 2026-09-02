@@ -1,5 +1,6 @@
 import FAQ from "../components/FAQ";
 import { useState } from "react";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 export default function CustomPiece() {
   const [files, setFiles] = useState([]);
@@ -65,6 +66,8 @@ export default function CustomPiece() {
 
     e.target.value = "";
   };
+
+  useDocumentTitle("Start a Custom Piece — The Woodlark's Nest");
 
   return (
     <>

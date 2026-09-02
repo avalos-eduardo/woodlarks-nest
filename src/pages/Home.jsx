@@ -6,8 +6,10 @@ import shopDrawings from "../assets/woodlark-shop-drawings.png";
 import tableTop from "../assets/woodlark-tabletop.jpg";
 import familyPic from "../assets/woodlark-family.jpg";
 import shoeBench from "../assets/woodlark-shoe-bench.jpg";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 export default function Home() {
+  useDocumentTitle("The Woodlark's Nest | Custom Hardwood Furniture");
   return (
     <>
       {/* Hero Image */}
