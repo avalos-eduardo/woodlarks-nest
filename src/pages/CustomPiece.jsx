@@ -325,8 +325,7 @@ export default function CustomPiece() {
             </option>
             <option value="Dining Table">Dining Table</option>
             <option value="Coffee Table">Coffee Table</option>
-            <option value="End/Accent Table">End/Accent Table</option>
-            <option value="Console Table">Console Table</option>
+            <option value="Bookcase">Bookcase</option>
             <option value="Other">Other</option>
           </select>
 
