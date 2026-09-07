@@ -20,7 +20,7 @@ export default function Home() {
           className="absolute inset-0 -z-20 h-full w-full object-cover object-bottom"
         />
         <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_15%,rgba(0,0,0,0.3)_15%,transparent_100%)]"></div>
-        <div class="flex flex-col h-full items-center justify-center gap-8 lg:gap-12 px-5 pb-4">
+        <div className="flex flex-col h-full items-center justify-center gap-8 lg:gap-12 px-5 pb-4">
           <h1 className="text-5xl lg:text-7xl font-playfair-display text-center">
             Handcrafted for <span className="italic">Your</span> Nest
           </h1>
@@ -280,7 +280,7 @@ export default function Home() {
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center bg-black"
         />
         <div className="absolute inset-0 -z-10 pointer-events-none bg-[radial-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0)_0%,white_850%)]"></div>
-        <div class="flex flex-col h-full items-center gap-8 lg:gap-12 px-5 pb-4">
+        <div className="flex flex-col h-full items-center gap-8 lg:gap-12 px-5 pb-4">
           <h1 className="text-3xl md:text-5xl font-playfair-display text-center">
             Let's Bring Your Ideas Home
           </h1>

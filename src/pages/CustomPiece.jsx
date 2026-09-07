@@ -5,6 +5,10 @@ import useDocumentTitle from "../hooks/useDocumentTitle";
 export default function CustomPiece() {
   const [files, setFiles] = useState([]);
   const [fileError, setFileError] = useState("");
+  const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,14 +26,65 @@ export default function CustomPiece() {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
+    if (name === "phone") {
+      const numbersOnly = value.replace(/\D/g, "");
+
+      setFormData((current) => ({
+        ...current,
+        phone: numbersOnly,
+      }));
+
+      return;
+    }
+
     setFormData((current) => ({
       ...current,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
+  const validateForm = () => {
+    if (!formData.firstName.trim()) {
+      return "Please enter your first name.";
+    }
+
+    if (!formData.lastName.trim()) {
+      return "Please enter your last name.";
+    }
+
+    if (!formData.email.trim()) {
+      return "Please enter your email address.";
+    }
+
+    if (!formData.pieceType) {
+      return "Please select the type of piece you're interested in.";
+    }
+
+    if (!formData.budget) {
+      return "Please select your budget.";
+    }
+
+    if (!formData.description.trim() || formData.description.length < 5) {
+      return "Please tell us a little about the piece you're envisioning.";
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setFormError("");
+    setSubmitSuccess(false);
+    setIsSubmitting(true);
+
+    const validationError = validateForm();
+
+    if (validationError) {
+      setFormError(validationError);
+      setIsSubmitting(false);
+      return;
+    }
 
     const submission = new FormData();
 
@@ -47,7 +102,9 @@ export default function CustomPiece() {
     });
 
     try {
-      const response = await fetch("/api/contact", {
+      const baseUrl = import.meta.env.VITE_API_URL;
+
+      const response = await fetch(`${baseUrl}/api/contact`, {
         method: "POST",
         body: submission,
       });
@@ -56,12 +113,14 @@ export default function CustomPiece() {
         throw new Error("Failed to submit form");
       }
 
-      // add success handling here later.
       console.log("Form submitted successfully!");
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      // add user-facing error handling here later.
+      setFormError(
+        "Something went wrong while submitting your request. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -143,6 +202,28 @@ export default function CustomPiece() {
           onSubmit={handleSubmit}
           className="flex flex-col bg-offwhite rounded-3xl w-[85vw] md:w-[55vw] p-8 md:p-10 lg:p-12 font-lato text-wood-brown"
         >
+          {formError && (
+            <div className="flex items-center gap-4 bg-[#D7282F] text-white rounded-2xl px-5 py-3 mb-6">
+              <span className="flex items-center justify-center shrink-0 border-2 border-white rounded-full w-7 h-7 font-bold text-lg">
+                !
+              </span>
+
+              <span className="text-base md:text-lg">{formError}</span>
+            </div>
+          )}
+          {submitSuccess && (
+            <div className="flex items-center gap-4 bg-[#2A6B45] text-white rounded-2xl px-5 py-3 mb-6">
+              <span className="flex items-center justify-center shrink-0 border-2 border-white rounded-full w-7 h-7 font-bold">
+                ✓
+              </span>
+
+              <span className="text-base md:text-lg">
+                Thanks! Your request has been sent successfully. We'll be in
+                touch soon.
+              </span>
+            </div>
+          )}
+
           <p className="text-xl mb-3">Name</p>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex flex-1 flex-col gap-2">
@@ -155,6 +236,8 @@ export default function CustomPiece() {
                 type="text"
                 value={formData.firstName}
                 onChange={handleChange}
+                disabled={isSubmitting}
+                maxLength={50}
                 className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
                 required
               />
@@ -169,6 +252,8 @@ export default function CustomPiece() {
                 type="text"
                 value={formData.lastName}
                 onChange={handleChange}
+                disabled={isSubmitting}
+                maxLength={50}
                 className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
                 required
               />
@@ -184,6 +269,9 @@ export default function CustomPiece() {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            disabled={isSubmitting}
+            maxLength={254}
+            autoComplete="email"
             className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
             required
           />
@@ -197,6 +285,7 @@ export default function CustomPiece() {
               type="checkbox"
               checked={formData.newsletter}
               onChange={handleChange}
+              disabled={isSubmitting}
               className="mr-3 appearance-none rounded-full h-4 w-4 border border-[#9b9585] bg-transparent cursor-pointer checked:bg-wood-brown"
             />
             <span>Sign up for news and updates</span>
@@ -209,8 +298,12 @@ export default function CustomPiece() {
             id="phone"
             name="phone"
             type="tel"
+            inputMode="numeric"
+            autoComplete="tel"
             value={formData.phone}
             onChange={handleChange}
+            disabled={isSubmitting}
+            maxLength={10}
             className="bg-white rounded-lg h-11 px-3 outline-none border border-transparent focus:border-wood-brown"
           />
 
@@ -223,17 +316,18 @@ export default function CustomPiece() {
             name="pieceType"
             value={formData.pieceType}
             onChange={handleChange}
+            disabled={isSubmitting}
             className="bg-white rounded-lg h-11 px-3 text-[#777] outline-none border border-transparent focus:border-wood-brown cursor-pointer"
             required
           >
             <option value="" disabled>
               Select an option
             </option>
-            <option value="dining-table">Dining Table</option>
-            <option value="coffee-table">Coffee Table</option>
-            <option value="console-table">End/Accent Table</option>
-            <option value="cabinet">Console Table</option>
-            <option value="other">Other</option>
+            <option value="Dining Table">Dining Table</option>
+            <option value="Coffee Table">Coffee Table</option>
+            <option value="End/Accent Table">End/Accent Table</option>
+            <option value="Console Table">Console Table</option>
+            <option value="Other">Other</option>
           </select>
 
           <label htmlFor="budget" className="text-xl mt-7 mb-3">
@@ -244,17 +338,20 @@ export default function CustomPiece() {
             name="budget"
             value={formData.budget}
             onChange={handleChange}
+            disabled={isSubmitting}
             className="bg-white rounded-lg h-11 px-3 text-[#777] outline-none border border-transparent focus:border-wood-brown cursor-pointer"
             required
           >
             <option value="" disabled>
               Select an option
             </option>
-            <option value="2000-5000">$2,000 – $5,000</option>
-            <option value="5000-8000">$5,000 – $8,000</option>
-            <option value="8000-12000">$8,000 - $12,000</option>
-            <option value="12000-plus">$12,000+</option>
-            <option value="unsure">Not sure yet, let's discuss</option>
+            <option value="$2,000 - $5,000">$2,000 – $5,000</option>
+            <option value="$5,000 - $8,000">$5,000 – $8,000</option>
+            <option value="$8,000 - $12,000">$8,000 - $12,000</option>
+            <option value="$12,000+">$12,000+</option>
+            <option value="Not sure yet, let's discuss">
+              Not sure yet, let's discuss
+            </option>
           </select>
 
           <label htmlFor="description" className="text-xl mt-7 mb-3">
@@ -267,15 +364,21 @@ export default function CustomPiece() {
             Ex: Approx. dimensions | Preferred hardwoods | Ideal timeline | Any
             unique constraints
           </p>
+
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
+            disabled={isSubmitting}
             rows="5"
+            maxLength={2000}
             className="bg-white rounded-lg p-3 resize-none outline-none border border-transparent focus:border-wood-brown"
             required
           />
+          <p className="text-sm text-[#777] text-right mt-1">
+            {formData.description.length}/2000
+          </p>
 
           <label className="text-xl mt-7 mb-3">Image Upload</label>
           {fileError && (
@@ -338,6 +441,7 @@ export default function CustomPiece() {
                   {item.status === "error" && (
                     <button
                       type="button"
+                      disabled={isSubmitting}
                       onClick={() => {
                         setFiles((currentFiles) =>
                           currentFiles.filter(
@@ -357,9 +461,10 @@ export default function CustomPiece() {
 
           <button
             type="submit"
+            disabled={isSubmitting}
             className="self-start mt-5 bg-wood-brown text-white font-playfair-display text-2xl px-5 py-6 rounded-md hover:opacity-90 transition-opacity cursor-pointer"
           >
-            Send My Vision
+            {isSubmitting ? "Sending..." : "Send My Vision"}
           </button>
         </form>
       </section>
